@@ -1,20 +1,31 @@
 <template>
-    <div>
-      <h1>Product List</h1>
-      <img
-        v-if="loading"
-        src="https://i.imgur.com/JfPpwOA.gif"
+  <div>
+    <h3>Products</h3>
+    <!-- list of product cards that wraps -->
+    <v-row>
+      <v-col
+        sm="6"
+        md="4"
+        v-for="product in products"
+        :key="product.id"
       >
-      <ul v-else>
-        <li v-for="product in products" :key="product.id">
-          {{product.title}} - ${{product.price}} - {{product.inventory}}
-          <button
-            :disabled="!productIsInStock(product)"
-            @click="addProductToCart(product)"
-          >Add to cart</button>
-        </li>
-      </ul>
-    </div>
+        <v-card outlined>
+          <v-card-title>{{ product.title }}</v-card-title>
+          <v-card-subtitle>${{ product.price }}</v-card-subtitle>
+          <v-card-text>{{ product.inventory }}</v-card-text>
+          <v-card-actions>
+            <v-btn 
+              :disabled="!productIsInStock(product)"
+              @click="addProductToCart(product)" 
+              color="success" outlined
+            >
+            Add to Cart
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </div>
 </template>
 
 <script>
