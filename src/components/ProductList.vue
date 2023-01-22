@@ -6,7 +6,7 @@
       <v-col
         sm="6"
         md="4"
-        v-for="product in products.slice(0, 3)"
+        v-for="product in products"
         :key="product.id"
       >
         <v-card outlined>

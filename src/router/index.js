@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-// import Store from '../views/Store.vue'
+import Store from '../views/Store.vue'
 import Cart from '../views/Cart.vue'
 
 Vue.use(VueRouter)
@@ -12,13 +12,11 @@ const routes = [
     name: 'home',
     component: Home
   },
-  /*
   {
     path: '/store',
     name: 'store',
     component: Store
   },
-  */
   { 
     path: '/cart',
     name: 'cart',
