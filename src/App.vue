@@ -1,20 +1,19 @@
 <template>
-  <div id="app">
-    <ProductList/>
-    <hr>
-    <ShoppingCart/>
-  </div>
+  <v-app>
+    <TopNav />
+    <v-content>
+      <router-view></router-view>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-import ProductList from './components/ProductList'
-import ShoppingCart from './components/ShoppingCart'
+import TopNav from './components/TopNav.vue'
 
 export default {
   name: 'app',
   components: {
-    ProductList,
-    ShoppingCart
-  }
+    TopNav
+  },
 }
 </script>
