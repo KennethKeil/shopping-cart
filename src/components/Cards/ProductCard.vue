@@ -1,7 +1,6 @@
 <template>
   <v-card outlined>
-    <!--<v-img :src="product.image" height="200px"/>-->
-    <v-img src="../../assets/images/cplus-lernen.jpeg" height="200px"/>
+    <v-img class="mx-auto my-5 ma-10" :src="getImgUrl(product.image)" v-bind:alt="product.image" contain max-width="200px"/>
     <v-card-title>{{ product.title }}</v-card-title>
     <v-card-subtitle>${{ product.price }}</v-card-subtitle>
     <v-card-text>{{ product.inventory }}</v-card-text>
@@ -45,7 +44,10 @@
       ...mapActions({
         fetchProducts: 'products/fetchProducts',
         addProductToCart: 'cart/addProductToCart'
-      })
+      }),
+      getImgUrl(url) {
+        return require('../../assets/images/'+url)
+      }
     },
 
     created () {
