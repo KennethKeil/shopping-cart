@@ -20,7 +20,6 @@
 
     computed: {
       ...mapGetters('cart', {
-        products: 'cartProducts',
         total: 'cartTotal'
       }),
 
