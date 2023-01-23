@@ -35,7 +35,7 @@ export default {
       })
     },
 
-    removeProductFromCart (state, productId) {
+    popProductFromCart (state, productId) {
       const i = state.items.map(item => item.id).indexOf(productId);
       state.items.splice(i, 1);
     },
@@ -73,7 +73,7 @@ export default {
     removeProductFromCart({state, getters, commit, rootState, rootGetters}, product) {
       const cartItem = state.items.find(item => item.id === product.id)
       if (!cartItem) {
-        commit('removeProductFromCart', product.id)
+        commit('popProductFromCart', product.id)
       } else {
         commit('decrementItemQuantity', cartItem)
       }

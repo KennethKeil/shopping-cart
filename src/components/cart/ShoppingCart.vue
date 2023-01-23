@@ -50,7 +50,9 @@
     },
 
     methods: {
-      ...mapActions('cart', ['checkout'])
+      ...mapActions({
+        removeProductFromCart: 'cart/removeProductFromCart'
+      })
     }
   }
 </script>
