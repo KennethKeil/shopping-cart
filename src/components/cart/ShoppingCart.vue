@@ -29,6 +29,7 @@
                       <v-btn
                         color="error"
                         class="ml-4"
+                        @click="removeProductFromCart(product)"
                         outlined
                         small
                       >
@@ -76,7 +77,7 @@
     },
 
     methods: {
-      ...mapActions('cart', ['checkout'])
+      ...mapActions('cart', ['checkout'], {fetchProducts: 'products/fetchProducts', removeProductFromCart: 'cart/removeProductFromCart'})
     }
   }
 </script>
