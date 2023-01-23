@@ -50,11 +50,7 @@
       }
     },
 
-    created () {
-      this.loading = true
-      this.fetchProducts()
-        .then(() => this.loading = false)
-    }
+
   }
 </script>
 
