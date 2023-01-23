@@ -15,6 +15,7 @@ export default {
       return state.items.map(cartItem => {
         const product = rootState.products.items.find(product => product.id === cartItem.id)
         return {
+          id: product.id,
           title: product.title,
           price: product.price,
           quantity: cartItem.quantity
@@ -59,6 +60,8 @@ export default {
 
   actions: {
     addProductToCart({state, getters, commit, rootState, rootGetters}, product) {
+      console.log(product);
+      console.log(product.id);
       if (rootGetters['products/productIsInStock'](product)) {
         const cartItem = state.items.find(item => item.id === product.id)
         if (!cartItem) {
@@ -71,6 +74,8 @@ export default {
     },
 
     removeProductFromCart({state, getters, commit, rootState, rootGetters}, product) {
+      console.log(product);
+      console.log(product.id);
       const cartItem = state.items.find(item => item.id === product.id)
       if (!cartItem) {
         commit('popProductFromCart', product.id)
@@ -81,6 +86,7 @@ export default {
     },
 
     checkout({state, commit}) {
+      // Stripe Implementation
       shop.buyProducts(
         state.items,
         () => {

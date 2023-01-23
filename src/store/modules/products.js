@@ -30,7 +30,9 @@ export default {
       product.inventory--
     },
 
-    incrementProductInventory (state, product) {
+    incrementProductInventory (state, cartItem) {
+      console.log(cartItem.id);
+      const product = state.items.find(item => item.id === cartItem.id)
       product.inventory++
     }
   },
