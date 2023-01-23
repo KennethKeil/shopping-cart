@@ -37,7 +37,7 @@ export default {
     },
 
     popProductFromCart (state, productId) {
-      const i = state.items.map(item => item.id).indexOf(productId);
+      const i = state.items.indexOf(productId);
       state.items.splice(i, 1);
     },
 

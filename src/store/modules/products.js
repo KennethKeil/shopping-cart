@@ -31,7 +31,6 @@ export default {
     },
 
     incrementProductInventory (state, cartItem) {
-      console.log(cartItem.id);
       const product = state.items.find(item => item.id === cartItem.id)
       product.inventory++
     }
