@@ -14,20 +14,7 @@
             v-for="product in products.slice(0, 3)"
             :key="product.id"
           >
-            <v-card outlined>
-                <v-card-title>{{ product.title }}</v-card-title>
-                <v-card-subtitle>${{ product.price }}</v-card-subtitle>
-                <v-card-text>{{ product.inventory }}</v-card-text>
-                <v-card-actions>
-                    <v-btn 
-                        :disabled="!productIsInStock(product)"
-                        @click="addProductToCart(product)" 
-                        color="success" outlined
-                    >
-                    Add to Cart
-                    </v-btn>
-                </v-card-actions>
-            </v-card>
+            <ProductCard :product="product"/>
           </v-col>
         </v-row>
       </v-col>
@@ -36,8 +23,14 @@
 </template>
 
 <script>
-  import {mapState, mapGetters, mapActions} from 'vuex'
+  import {mapState, mapActions} from 'vuex'
+  import ProductCard from '@/components/Cards/ProductCard.vue'
+
   export default {
+    components: {
+      ProductCard
+    },
+
     data () {
       return {
         loading: false,
@@ -49,16 +42,12 @@
       ...mapState({
         products: state => state.products.items
       }),
-
-      ...mapGetters('products', {
-        productIsInStock: 'productIsInStock'
-      })
     },
 
+    
     methods: {
       ...mapActions({
         fetchProducts: 'products/fetchProducts',
-        addProductToCart: 'cart/addProductToCart'
       })
     },
 
