@@ -77,6 +77,7 @@ export default {
             console.log(product);
             console.log(product.id);
             const cartItem = state.items.find(item => item.id === product.id)
+
             if (cartItem.quantity == 1) {
                 commit('popProductFromCart', product.id)
             } else {
