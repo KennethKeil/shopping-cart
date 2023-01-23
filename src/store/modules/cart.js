@@ -36,9 +36,10 @@ export default {
             })
         },
 
-        popProductFromCart(state, productId) {
-            const i = state.items.indexOf(productId);
-            state.items.splice(i, 1);
+        removeProductById(state, productId) {
+            state.items = state.items.filter(function (obj) {
+                return obj.id !== productId;
+            });
         },
 
         incrementItemQuantity(state, cartItem) {
@@ -76,10 +77,11 @@ export default {
         removeProductFromCart({state, getters, commit, rootState, rootGetters}, product) {
             console.log(product);
             console.log(product.id);
-            const cartItem = state.items.find(item => item.id === product.id)
+            console.log(state.items)
 
+            const cartItem = state.items.find(item => item.id === product.id)
             if (cartItem.quantity == 1) {
-                commit('popProductFromCart', product.id)
+                commit('removeProductById', product.id)
             } else {
                 commit('decrementItemQuantity', cartItem)
             }
