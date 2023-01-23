@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col sm="3" offset-lg="1">
-        SearchBar
+        <v-text-field v-model="search" label="Search" @input="filterProducts" />
       </v-col>
       <v-col sm="9" lg="7">
         <div>
@@ -12,7 +12,7 @@
             <v-col
               sm="6"
               md="4"
-              v-for="product in products"
+              v-for="product in filteredProducts"
               :key="product.id"
             >
               <ProductCard :product="product"/>
@@ -23,18 +23,19 @@
     </v-row>
   </v-container>
 </template>
-
 <script>
+  /* eslint-disable */
   import {mapState, mapActions} from 'vuex'
   import ProductCard from '@/components/Cards/ProductCard.vue'
 
   export default {
     components: {
-      ProductCard
+      ProductCard,
     },
 
     data () {
       return {
+        search: '',
         loading: false,
         productIndex: 1
       }
@@ -44,13 +45,21 @@
       ...mapState({
         products: state => state.products.items
       }),
+      filteredProducts() {
+        return this.products.filter(product => {
+          return product.title.toLowerCase().includes(this.search.toLowerCase())
+        })
+      }
     },
 
     
     methods: {
       ...mapActions({
         fetchProducts: 'products/fetchProducts',
-      })
+      }),
+      filterProducts() {
+        this.fetchProducts(this.search)
+      }
     },
 
   }

@@ -1,5 +1,5 @@
 <template>
-  <div>
-      Test
-  </div>
+  <v-main class="mb-10">
+
+  </v-main>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar color="primary" dark>
-      <v-toolbar-title class="text-lg-center">Bookshop.de</v-toolbar-title>
+      <v-toolbar-title class="text-lg-center" @click="navigateToHome">Bookshop.de</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -67,6 +67,11 @@ export default {
         { title: 'Store', link: 'store', icon: 'store' },
         { title: 'Cart', link: 'cart', icon: 'cart' }
       ]
+    }
+  },
+  methods: {
+    navigateToHome() {
+      this.$router.push('/');
     }
   }
 }
