@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-app-bar>
-      <v-toolbar-title>Bookshop</v-toolbar-title>
+    <v-app-bar color="primary" dark>
+      <v-toolbar-title class="text-lg-center">Bookshop.de</v-toolbar-title>
 
       <v-spacer></v-spacer>
 

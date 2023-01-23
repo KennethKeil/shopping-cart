@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col sm="3" offset-lg="1">
-        Sidebar
+        SearchBar
       </v-col>
       <v-col sm="9" lg="7">
         <div>

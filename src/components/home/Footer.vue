@@ -1,7 +1,7 @@
 <template>
   <v-footer
       absolute
-      class="font-weight-medium"
+      class="font-weight-medium white pa-4"
     >
       <v-col
         class="text-center"
