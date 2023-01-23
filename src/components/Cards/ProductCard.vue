@@ -1,5 +1,7 @@
 <template>
   <v-card outlined>
+    <!--<v-img :src="product.image" height="200px"/>-->
+    <v-img src="../../assets/images/cplus-lernen.jpeg" height="200px"/>
     <v-card-title>{{ product.title }}</v-card-title>
     <v-card-subtitle>${{ product.price }}</v-card-subtitle>
     <v-card-text>{{ product.inventory }}</v-card-text>
@@ -25,7 +27,7 @@
     data () {
       return {
         loading: false,
-        productIndex: 1
+        productIndex: 1,
       }
     },
 
