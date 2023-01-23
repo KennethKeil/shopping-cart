@@ -24,7 +24,7 @@
 
 <script>
   import {mapState, mapActions} from 'vuex'
-  import ProductCard from '@/components/Cards/ProductCard.vue'
+  import ProductCard from '@/components/cards/ProductCard.vue'
 
   export default {
     components: {

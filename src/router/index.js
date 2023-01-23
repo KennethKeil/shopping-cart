@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Store from '../views/Store.vue'
-import Cart from '../views/Cart.vue'
+import HomeView from '../views/HomeView.vue'
+import StoreView from '../views/StoreView.vue'
+import CartView from '../views/CartView.vue'
+import SuccessPage from '../views/SuccessPage.vue'
+import ErrorPage from '../views/ErrorPage.vue'
 
 Vue.use(VueRouter)
 
@@ -10,18 +12,29 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: HomeView
   },
   {
     path: '/store',
     name: 'store',
-    component: Store
+    component: StoreView
   },
   { 
     path: '/cart',
     name: 'cart',
-    component: Cart
+    component: CartView
   },
+  { 
+    path: '/success',
+    name: 'Success',
+    component: SuccessPage
+  },
+  { 
+    path: '/error',
+    name: 'Error',
+    component: ErrorPage
+  },
+
 ]
 
 const router = new VueRouter({
