@@ -1,5 +1,6 @@
 /* eslint-disable */
 import shop from "@/api/shop";
+import axios from 'axios';
 
 export default {
   namespaced: true,
@@ -39,11 +40,14 @@ export default {
   actions: {
     fetchProducts({commit}) {
       return new Promise((resolve, reject) => {
-        // make the call
-        // call setProducts mutation
-        shop.getProducts(products => {
-          commit('setProducts', products)
+        axios.get(`https://ivm108.informatik.htw-dresden.de/ewa/g17/php-backend/read.php`)
+        .then(response => {
+          commit('setProducts', response.data)
           resolve()
+        })
+        .catch(e => {
+          this.errors.push(e)
+          reject()
         })
       })
     }
