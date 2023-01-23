@@ -35,8 +35,17 @@ export default {
       })
     },
 
+    removeProductFromCart (state, productId) {
+      const i = state.items.map(item => item.id).indexOf(productId);
+      state.items.splice(i, 1);
+    },
+
     incrementItemQuantity (state, cartItem) {
       cartItem.quantity++
+    },
+
+    decrementItemQuantity (state, cartItem) {
+      cartItem.quantity--
     },
 
     setCheckoutStatus (state, status) {
@@ -61,6 +70,16 @@ export default {
       }
     },
 
+    removeProductFromCart({state, getters, commit, rootState, rootGetters}, product) {
+      const cartItem = state.items.find(item => item.id === product.id)
+      if (!cartItem) {
+        commit('removeProductFromCart', product.id)
+      } else {
+        commit('decrementItemQuantity', cartItem)
+      }
+      commit('products/incrementProductInventory', product, {root: true})
+    },
+
     checkout({state, commit}) {
       shop.buyProducts(
         state.items,
@@ -72,6 +91,6 @@ export default {
           commit('setCheckoutStatus', 'fail')
         }
       )
-    }
+    },
   }
 }
