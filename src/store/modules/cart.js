@@ -24,7 +24,7 @@ export default {
         },
 
         cartTotal(state, getters) {
-            return getters.cartProducts.reduce((total, product) => total + product.price * product.quantity, 0)
+            return getters.cartProducts.reduce((total, product) => total + product.price * product.quantity, 0).toFixed(2)
         },
     },
 
@@ -61,8 +61,6 @@ export default {
 
     actions: {
         addProductToCart({state, getters, commit, rootState, rootGetters}, product) {
-            console.log(product);
-            console.log(product.id);
             if (rootGetters['products/productIsInStock'](product)) {
                 const cartItem = state.items.find(item => item.id === product.id)
                 if (!cartItem) {
@@ -75,10 +73,6 @@ export default {
         },
 
         removeProductFromCart({state, getters, commit, rootState, rootGetters}, product) {
-            console.log(product);
-            console.log(product.id);
-            console.log(state.items)
-
             const cartItem = state.items.find(item => item.id === product.id)
             if (cartItem.quantity == 1) {
                 commit('removeProductById', product.id)
