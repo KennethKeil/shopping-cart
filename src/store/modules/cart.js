@@ -1,11 +1,12 @@
 /* eslint-disable */
 import shop from "@/api/shop";
+import { loadStripe } from "@stripe/stripe-js";
+import axios from "axios";
 
 export default {
     namespaced: true,
 
     state: {
-        // {id, quantity}
         items: [],
         checkoutStatus: null
     },
@@ -82,18 +83,49 @@ export default {
             commit('products/incrementProductInventory', product, {root: true})
         },
 
-        checkout({state, commit}) {
-            // Stripe Implementation
-            shop.buyProducts(
-                state.items,
-                () => {
-                    commit('emptyCart')
-                    commit('setCheckoutStatus', 'success')
+        async checkout({state, commit}) {
+
+            const cartItems = state.items;
+
+            console.log("test 1");
+            console.log(cartItems);
+
+            // undefinded
+            const stripeBody = cartItems.map((item) => {
+                return {
+                price_data: {
+                    currency: "EUR",
+                    unit_amount: Number(item.price) * 100,
+                    product_data: {
+                    name: item.title,
+                    description: item.description,
+                    images: [item.image],
+                    },
                 },
-                () => {
-                    commit('setCheckoutStatus', 'fail')
-                }
-            )
+                quantity: item.amount,
+                };
+            });
+
+            console.log("test 2");
+            console.log(stripeBody);
+
+            // Error
+            const response = await axios.post(
+                "https://ivm108.informatik.htw-dresden.de/ewa/g19/php-backend/create-checkout.session.php",
+                stripeBody
+            );
+
+            console.log(response);
+
+            if (response.status === 200) {
+                let { sessionId, pk } = await response.data;
+
+                // Stripe.js will not be loaded until `loadStripe` is called
+                const stripe = await loadStripe(pk);
+                stripe?.redirectToCheckout({
+                    sessionId: sessionId,
+                });
+            }
         },
     }
 }
